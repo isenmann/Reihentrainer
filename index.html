@@ -4,176 +4,297 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 <title>Reihentrainer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bangers&family=Figtree:wght@500;700;800;900&family=Lexend:wght@400;500;700;800&family=Rubik:wght@500;700;800&family=Russo+One&display=swap">
 <style>
-  :root {
-    --bg1: #6a5cff;
-    --bg2: #ff7eb3;
-    --card: #ffffff;
-    --ink: #2d2a4a;
-    --good: #2ecc71;
-    --bad: #ff6b6b;
-    --gold: #ffc93c;
-    --shadow: 0 8px 0 rgba(0,0,0,.15);
+  /* ---------- Stile: Level (arcade), Klar (klar), Comic (comic) ---------- */
+  body[data-look="klar"] {
+    --bg: #f4f6fa;
+    --text: #16264a; --text-dim: #6a7591;
+    --surface: #ffffff; --ink: #16264a; --muted: #6a7591;
+    --accent: #ff6a13; --accent-ink: #fff; --accent-shadow: 0 5px 0 #c94d05;
+    --alt: #16264a; --alt-shadow: 0 5px 0 #0a1530;
+    --op: #ff6a13; --ans: #16264a; --ans-line: #e3e8f2;
+    --good: #16a864; --good-shadow: 0 4px 0 #0e7a47;
+    --bad: #e5484d;  --bad-shadow: 0 4px 0 #a52a2e;
+    --key: #ffffff; --key-ink: #16264a; --key-border: 2px solid #e3e8f2;
+    --key-shadow: 0 4px 0 #e3e8f2; --key-shadow-press: 0 1px 0 #e3e8f2; --key-press: translateY(3px);
+    --card-border: none; --card-shadow: 0 1px 2px rgba(22,38,74,.08), 0 10px 28px rgba(22,38,74,.08);
+    --r-card: 22px; --r-btn: 14px;
+    --prog-empty: #e3e8f2; --prog-half: #ffc49e; --prog-full: #ff6a13;
+    --font-display: "Figtree", "Segoe UI", system-ui, sans-serif; --display-weight: 900;
+    --font-num: var(--font-display); --num-weight: var(--display-weight);
+    --font-body: "Figtree", "Segoe UI", system-ui, sans-serif;
   }
+  body[data-look="arcade"] {
+    --bg: radial-gradient(120% 70% at 50% 0%, #232c85 0%, #12163a 65%) fixed, #12163a;
+    --text: #eef0ff; --text-dim: #8f96d6;
+    --surface: #1c2254; --ink: #eef0ff; --muted: #8f96d6;
+    --accent: #3ee0ff; --accent-ink: #0d1030; --accent-shadow: 0 5px 0 #1a9bb5;
+    --alt: #ff4f8b; --alt-shadow: 0 5px 0 #a8264f;
+    --op: #ff4f8b; --ans: #ffb627; --ans-line: #2c3478;
+    --good: #1fbf75; --good-shadow: 0 5px 0 #0f7a49, 0 0 18px rgba(31,191,117,.55);
+    --bad: #ff4f8b;  --bad-shadow: 0 5px 0 #a8264f;
+    --key: #262e6e; --key-ink: #eef0ff; --key-border: none;
+    --key-shadow: 0 5px 0 #0b0e2a; --key-shadow-press: 0 1px 0 #0b0e2a; --key-press: translateY(4px);
+    --card-border: 2px solid #2c3478; --card-shadow: 0 0 40px rgba(62,224,255,.08);
+    --r-card: 16px; --r-btn: 12px;
+    --prog-empty: #2c3478; --prog-half: linear-gradient(90deg, #3ee0ff 50%, #2c3478 50%); --prog-full: #3ee0ff;
+    --font-display: "Russo One", "Arial Black", sans-serif; --display-weight: 400;
+    --font-num: var(--font-display); --num-weight: var(--display-weight);
+    --font-body: "Rubik", "Segoe UI", system-ui, sans-serif;
+  }
+  body[data-look="comic"] {
+    --bg: radial-gradient(rgba(20,20,20,.13) 1.3px, transparent 1.5px) 0 0 / 10px 10px, #ffd23f;
+    --text: #141414; --text-dim: #141414;
+    --surface: #fffdf4; --ink: #141414; --muted: #3a3a3a;
+    --accent: #2b59c3; --accent-ink: #fff; --accent-shadow: 4px 4px 0 #141414;
+    --alt: #e63946; --alt-shadow: 4px 4px 0 #141414;
+    --op: #e63946; --ans: #2b59c3; --ans-line: #141414;
+    --good: #2bb673; --good-shadow: 4px 4px 0 #141414;
+    --bad: #e63946;  --bad-shadow: 4px 4px 0 #141414;
+    --key: #ffffff; --key-ink: #141414; --key-border: 3px solid #141414;
+    --key-shadow: 4px 4px 0 #141414; --key-shadow-press: 1px 1px 0 #141414; --key-press: translate(3px, 3px);
+    --card-border: 3px solid #141414; --card-shadow: 7px 7px 0 #141414;
+    --r-card: 6px; --r-btn: 6px;
+    --prog-empty: rgba(20,20,20,.22); --prog-half: #fffdf4; --prog-full: #e63946;
+    --font-display: "Bangers", "Impact", sans-serif; --display-weight: 400;
+    /* Bangers-Ziffern sind schwer lesbar (7 sieht aus wie 1) – Zahlen daher in Lexend */
+    --font-num: "Lexend", "Segoe UI", system-ui, sans-serif; --num-weight: 800;
+    --font-body: "Lexend", "Segoe UI", system-ui, sans-serif;
+  }
+
+  /* ---------- Grundlayout ---------- */
   * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
   html, body { height: 100%; margin: 0; }
   body {
-    font-family: "Nunito", "Comic Sans MS", "Chalkboard SE", "Trebuchet MS", system-ui, sans-serif;
-    color: var(--ink);
-    background: linear-gradient(160deg, var(--bg1), var(--bg2));
-    background-attachment: fixed;
+    font-family: var(--font-body); color: var(--text); background: var(--bg);
     display: flex; flex-direction: column; align-items: center;
-    overflow-x: hidden;
-    user-select: none;
+    overflow-x: hidden; user-select: none;
   }
-  .bubbles { position: fixed; inset: 0; pointer-events: none; z-index: 0; overflow: hidden; }
+  button { font-family: inherit; }
+  button:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; }
+
+  .bubbles { display: none; position: fixed; inset: 0; pointer-events: none; z-index: 0; overflow: hidden; }
+  body[data-look="arcade"] .bubbles { display: block; }
   .bubbles span {
     position: absolute; bottom: -80px; border-radius: 50%;
-    background: rgba(255,255,255,.18);
+    background: rgba(62,224,255,.06);
     animation: rise linear infinite;
   }
-  @keyframes rise { to { transform: translateY(-120vh) rotate(360deg); } }
+  @keyframes rise { to { transform: translateY(-120vh); } }
 
   main { position: relative; z-index: 1; width: 100%; max-width: 720px; padding: 16px; }
   .screen { display: none; }
-  .screen.active { display: block; animation: pop .35s ease-out; }
-  @keyframes pop { from { transform: scale(.92); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+  .screen.active { display: block; animation: pop .3s ease-out; }
+  @keyframes pop { from { transform: scale(.96); opacity: 0; } to { transform: scale(1); opacity: 1; } }
 
   h1 {
-    text-align: center; color: #fff; font-size: clamp(2rem, 7vw, 3.2rem); margin: 12px 0 4px;
-    text-shadow: 0 4px 0 rgba(0,0,0,.18);
+    text-align: center; font-family: var(--font-display); font-weight: var(--display-weight);
+    font-size: clamp(2.2rem, 8vw, 3.4rem); line-height: 1.05; margin: 16px 0 6px; color: var(--text);
   }
-  .sub { text-align: center; color: #fff; font-size: 1.25rem; margin: 0 0 20px; opacity: .95; }
+  body[data-look="arcade"] h1 { text-transform: uppercase; letter-spacing: .04em; text-shadow: 0 0 24px rgba(62,224,255,.45); }
+  body[data-look="comic"] h1 { color: #fffdf4; letter-spacing: .05em; -webkit-text-stroke: 2px #141414; text-shadow: 4px 4px 0 #141414; }
+  .sub { text-align: center; color: var(--text-dim); font-size: 1.15rem; font-weight: 700; margin: 0 0 22px; }
 
-  /* Auswahl */
+  /* ---------- Auswahl ---------- */
   .grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 14px; }
   @media (max-width: 520px) { .grid { grid-template-columns: repeat(3, 1fr); } }
   .tile {
-    position: relative; border: none; border-radius: 22px; cursor: pointer;
-    aspect-ratio: 1; font-family: inherit; color: #fff;
-    display: flex; flex-direction: column; align-items: center; justify-content: center;
-    box-shadow: var(--shadow); transition: transform .12s;
+    position: relative; aspect-ratio: 1; cursor: pointer;
+    border: var(--key-border); border-radius: var(--r-btn);
+    background: var(--key); color: var(--key-ink); box-shadow: var(--key-shadow);
+    display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px;
+    transition: transform .12s;
   }
-  .tile:hover { transform: translateY(-4px) rotate(-2deg); }
-  .tile:active { transform: translateY(4px); box-shadow: 0 3px 0 rgba(0,0,0,.15); }
-  .tile .num { font-size: clamp(2rem, 8vw, 2.8rem); font-weight: 900; line-height: 1; text-shadow: 0 3px 0 rgba(0,0,0,.2); }
-  .tile .emo { font-size: 1.5rem; margin-top: 4px; }
+  .tile:hover { transform: translateY(-3px); }
+  .tile:active { transform: var(--key-press); box-shadow: var(--key-shadow-press); }
+  .tile .num { font-family: var(--font-num); font-weight: var(--num-weight); font-size: clamp(1.8rem, 7vw, 2.4rem); line-height: 1; }
   .tile .medal {
-    position: absolute; top: -10px; right: -10px; background: var(--gold); color: var(--ink);
-    border-radius: 999px; min-width: 34px; height: 34px; padding: 0 6px;
+    position: absolute; top: -9px; right: -9px; min-width: 30px; height: 30px; padding: 0 7px;
+    border-radius: 999px; background: var(--alt); color: #fff; font-weight: 800; font-size: .85rem;
     display: flex; align-items: center; justify-content: center;
-    font-size: .95rem; font-weight: 900; box-shadow: 0 3px 0 rgba(0,0,0,.2);
   }
+  body[data-look="klar"] .tile.done { background: #16264a; border-color: #16264a; color: #fff; box-shadow: 0 4px 0 #0a1530; }
+  body[data-look="klar"] .tile .medal { background: var(--accent); }
+  body[data-look="arcade"] .tile { box-shadow: var(--key-shadow), inset 0 0 0 2px #2c3478; }
+  body[data-look="arcade"] .tile.done { box-shadow: var(--key-shadow), inset 0 0 0 2px var(--accent); }
+  body[data-look="arcade"] .tile::before { content: "LEVEL"; font-size: .62rem; font-weight: 700; letter-spacing: .14em; color: var(--muted); }
+  body[data-look="arcade"] .tile .er { display: none; }
+  body[data-look="arcade"] .tile .medal { background: #ffb627; color: #0d1030; }
+  body[data-look="comic"] .tile:nth-child(3n+2) { background: #bfe3ff; }
+  body[data-look="comic"] .tile:nth-child(3n) { background: #ffc2c7; }
+  body[data-look="comic"] .tile .medal { border: 2px solid #141414; }
 
-  /* Üben */
-  .topbar { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-bottom: 12px; }
+  .foot { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 14px 22px; margin-top: 30px; }
+  .looks { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 8px; }
+  .looks-label { font-weight: 800; color: var(--text-dim); }
+  .look {
+    display: flex; align-items: center; gap: 8px; cursor: pointer;
+    border: var(--key-border); border-radius: var(--r-btn); background: var(--key); color: var(--key-ink);
+    box-shadow: var(--key-shadow); padding: 7px 12px 7px 8px; font-weight: 800; font-size: .95rem;
+  }
+  .look:active { transform: var(--key-press); box-shadow: var(--key-shadow-press); }
+  .look[aria-checked="true"] { outline: 3px solid var(--accent); outline-offset: 2px; }
+  .look .sw { width: 22px; height: 22px; border-radius: 6px; flex: none; }
+  .sw-arcade { background: linear-gradient(135deg, #12163a 50%, #3ee0ff 50%); }
+  .sw-klar   { background: linear-gradient(135deg, #16264a 50%, #ff6a13 50%); }
+  .sw-comic  { background: linear-gradient(135deg, #ffd23f 50%, #e63946 50%); box-shadow: inset 0 0 0 2px #141414; }
+
+  /* ---------- Üben ---------- */
+  .topbar { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-bottom: 14px; }
   .btn-small {
-    border: none; background: rgba(255,255,255,.9); color: var(--ink); font-family: inherit;
-    font-size: 1.1rem; font-weight: 800; border-radius: 14px; padding: 10px 14px; cursor: pointer;
-    box-shadow: 0 4px 0 rgba(0,0,0,.15);
+    border: var(--key-border); border-radius: var(--r-btn); background: var(--key); color: var(--key-ink);
+    box-shadow: var(--key-shadow); font-size: 1rem; font-weight: 800; padding: 9px 14px; cursor: pointer;
   }
-  .btn-small:active { transform: translateY(3px); box-shadow: 0 1px 0 rgba(0,0,0,.15); }
-  .badge { color: #fff; font-weight: 900; font-size: 1.3rem; text-shadow: 0 2px 0 rgba(0,0,0,.2); }
+  .btn-small:active { transform: var(--key-press); box-shadow: var(--key-shadow-press); }
+  .badge { font-family: var(--font-display); font-weight: var(--display-weight); font-size: 1.4rem; color: var(--text); text-align: center; }
+  body[data-look="arcade"] .badge { text-transform: uppercase; letter-spacing: .06em; }
+  body[data-look="comic"] .badge { font-size: 1.8rem; letter-spacing: .04em; color: #fffdf4; -webkit-text-stroke: 1.5px #141414; text-shadow: 3px 3px 0 #141414; }
 
-  .progress { display: grid; grid-template-columns: repeat(10, 1fr); gap: 6px; margin-bottom: 14px; }
-  .dot {
-    aspect-ratio: 1; border-radius: 50%; background: rgba(255,255,255,.3);
-    display: flex; align-items: center; justify-content: center; font-size: clamp(.9rem, 3.5vw, 1.4rem);
-    transition: background .3s, transform .3s;
-  }
-  .dot.half { background: rgba(255,255,255,.75); }
-  .dot.full { background: var(--gold); transform: scale(1.08); }
+  .progress { display: grid; grid-template-columns: repeat(10, 1fr); gap: 5px; margin-bottom: 8px; }
+  .dot { height: 12px; border-radius: 999px; background: var(--prog-empty); transition: background .3s; }
+  .dot.half { background: var(--prog-half); }
+  .dot.full { background: var(--prog-full); }
   .dot.bump { animation: bump .5s; }
-  @keyframes bump { 50% { transform: scale(1.4); } }
+  @keyframes bump { 50% { transform: scale(1.3); } }
+  body[data-look="arcade"] .dot { border-radius: 3px; }
+  body[data-look="arcade"] .dot.full { box-shadow: 0 0 8px var(--accent); }
+  body[data-look="comic"] .dot {
+    height: auto; background: none; border-radius: 0; text-align: center; line-height: 1;
+    font-size: clamp(1.2rem, 5vw, 1.7rem); color: var(--prog-empty);
+  }
+  body[data-look="comic"] .dot::before { content: "★"; }
+  body[data-look="comic"] .dot.half { color: var(--prog-half); -webkit-text-stroke: 1.5px #141414; }
+  body[data-look="comic"] .dot.full { color: var(--prog-full); -webkit-text-stroke: 1.5px #141414; }
+
+  .round { display: flex; justify-content: space-between; gap: 10px; font-size: .9rem; font-weight: 700; color: var(--text-dim); margin-bottom: 14px; font-variant-numeric: tabular-nums; }
 
   .card {
-    background: var(--card); border-radius: 30px; padding: 22px 18px; text-align: center;
-    box-shadow: 0 10px 0 rgba(0,0,0,.15);
+    background: var(--surface); color: var(--ink); text-align: center; padding: 20px 18px;
+    border: var(--card-border); border-radius: var(--r-card); box-shadow: var(--card-shadow);
   }
-  .mascot { display: flex; align-items: center; justify-content: center; gap: 10px; min-height: 56px; }
-  .mascot .face { font-size: 2.6rem; display: inline-block; }
-  .mascot .face.jump { animation: jump .5s; }
-  @keyframes jump { 40% { transform: translateY(-14px) rotate(-10deg); } }
-  .speech {
-    background: #f1efff; border-radius: 16px; padding: 8px 14px; font-weight: 800; font-size: 1.15rem;
+  .speech { display: inline-block; min-height: 1.5em; font-weight: 800; font-size: 1.05rem; color: var(--muted); }
+  .speech.pop { animation: pop2 .4s; }
+  @keyframes pop2 { 40% { transform: scale(1.12); } }
+  body[data-look="arcade"] .speech { color: var(--accent); text-transform: uppercase; letter-spacing: .1em; font-size: .9rem; }
+  body[data-look="comic"] .speech {
+    position: relative; font-family: var(--font-display); font-weight: 400; font-size: 1.35rem; letter-spacing: .04em; color: #141414;
+    background: #fff; border: 3px solid #141414; border-radius: 18px; padding: 2px 16px; margin-bottom: 6px;
   }
-  .task { font-size: clamp(2.8rem, 13vw, 5rem); font-weight: 900; margin: 8px 0 4px; letter-spacing: 2px; }
-  .task .x { color: var(--bg2); }
+  body[data-look="comic"] .speech::after {
+    content: ""; position: absolute; left: 24px; bottom: -11px; width: 14px; height: 14px; background: #fff;
+    border-right: 3px solid #141414; border-bottom: 3px solid #141414; transform: rotate(45deg) skew(10deg, 10deg);
+  }
+
+  .task {
+    font-family: var(--font-num); font-weight: var(--num-weight); font-variant-numeric: tabular-nums;
+    font-size: clamp(2.8rem, 13vw, 4.6rem); line-height: 1.15; margin: 10px 0 4px;
+  }
+  .task .x { color: var(--op); }
   .answer {
-    display: inline-block; min-width: 2.2em; padding: 0 .2em; border-bottom: 6px solid #d8d4ff;
-    color: var(--bg1); transition: color .2s, border-color .2s;
+    display: inline-block; min-width: 1.8em; padding: 0 .15em; border-bottom: 5px solid var(--ans-line);
+    color: var(--ans); transition: color .2s, border-color .2s;
   }
   .answer.good { color: var(--good); border-color: var(--good); }
   .answer.bad { color: var(--bad); border-color: var(--bad); animation: shake .4s; }
   @keyframes shake { 20%,60% { transform: translateX(-8px); } 40%,80% { transform: translateX(8px); } }
-  .solution { min-height: 2rem; font-size: 1.4rem; font-weight: 800; color: var(--bad); }
+  .solution { min-height: 1.9rem; font-size: 1.3rem; font-weight: 800; color: var(--bad); }
 
   .pad { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 10px; }
-  .key {
-    border: none; border-radius: 18px; font-family: inherit; font-weight: 900;
-    font-size: clamp(1.6rem, 7vw, 2.2rem); padding: 12px 0; cursor: pointer;
-    background: #eeeaff; color: var(--ink); box-shadow: 0 5px 0 #cfc8ff;
+  .key, .choice {
+    border: var(--key-border); border-radius: var(--r-btn); cursor: pointer;
+    background: var(--key); color: var(--key-ink); box-shadow: var(--key-shadow);
+    font-family: var(--font-num); font-weight: var(--num-weight); font-variant-numeric: tabular-nums;
+    transition: background .2s, color .2s;
   }
-  .key:active { transform: translateY(4px); box-shadow: 0 1px 0 #cfc8ff; }
-  .key.del { background: #ffe3e3; box-shadow: 0 5px 0 #ffc2c2; }
-  .key.ok { background: var(--good); color: #fff; box-shadow: 0 5px 0 #1f9e55; }
-  .key.ok:active { box-shadow: 0 1px 0 #1f9e55; }
+  .key { font-size: clamp(1.6rem, 7vw, 2.1rem); padding: 12px 0; }
+  .key:active, .choice:active { transform: var(--key-press); box-shadow: var(--key-shadow-press); }
+  .key.del { color: var(--bad); }
+  .key.ok { background: var(--good); color: #fff; box-shadow: var(--good-shadow); }
+  .pad[hidden], .choices[hidden] { display: none; }
 
-  /* Geschafft */
-  .trophy { font-size: 7rem; display: inline-block; animation: spin 1.2s ease-out; }
-  @keyframes spin { from { transform: scale(0) rotate(-360deg); } to { transform: scale(1) rotate(0); } }
-  .done-title { font-size: clamp(2rem, 8vw, 3rem); font-weight: 900; margin: 6px 0; color: var(--bg1); }
-  .stats { font-size: 1.2rem; font-weight: 700; margin: 8px 0 18px; }
-  .big-btn {
-    display: block; width: 100%; border: none; border-radius: 20px; font-family: inherit;
-    font-size: 1.5rem; font-weight: 900; padding: 16px; margin-top: 12px; cursor: pointer; color: #fff;
-    background: var(--bg1); box-shadow: 0 6px 0 #4a3ed6;
+  /* Multiple Choice */
+  .choices { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 10px; }
+  .choice { font-size: clamp(2rem, 9vw, 2.8rem); padding: 20px 0; }
+  .choice.good { background: var(--good); color: #fff; box-shadow: var(--good-shadow); }
+  .choice.bad  { background: var(--bad); color: #fff; box-shadow: var(--bad-shadow); animation: shake .4s; }
+
+  /* ---------- Geschafft ---------- */
+  .trophy {
+    width: 112px; height: 112px; margin: 4px auto 8px; border-radius: 50%; line-height: 1;
+    display: flex; align-items: center; justify-content: center; font-size: 4rem;
+    background: var(--prog-full); color: var(--surface); border: var(--key-border); box-shadow: var(--key-shadow);
+    animation: spin 1.2s ease-out;
   }
-  .reset-wrap { text-align: center; margin-top: 26px; }
-  .reset-wrap[hidden] { display: none; }
-  .big-btn.alt { background: var(--bg2); box-shadow: 0 6px 0 #d95a8e; }
-  .big-btn:active { transform: translateY(5px); box-shadow: 0 1px 0 rgba(0,0,0,.2); }
+  @keyframes spin { from { transform: scale(0) rotate(-360deg); } to { transform: scale(1) rotate(0); } }
+  .done-title { font-family: var(--font-display); font-weight: var(--display-weight); font-size: clamp(2rem, 8vw, 2.8rem); line-height: 1.1; margin: 6px 0; }
+  body[data-look="comic"] .done-title { letter-spacing: .04em; }
+  .stats { font-size: 1.15rem; font-weight: 700; color: var(--muted); margin: 8px 0 18px; }
+  .stats .stars { color: var(--prog-full); letter-spacing: 2px; }
+  .big-btn {
+    display: block; width: 100%; cursor: pointer; margin-top: 14px; padding: 16px;
+    border: var(--key-border); border-radius: var(--r-btn);
+    font-family: var(--font-display); font-weight: var(--display-weight); font-size: 1.45rem;
+    background: var(--accent); color: var(--accent-ink); box-shadow: var(--accent-shadow);
+  }
+  body[data-look="comic"] .big-btn { letter-spacing: .05em; }
+  .big-btn.alt { background: var(--alt); color: #fff; box-shadow: var(--alt-shadow); }
+  .big-btn:active { transform: var(--key-press); box-shadow: var(--key-shadow-press); }
 
   #confetti { position: fixed; inset: 0; pointer-events: none; z-index: 5; }
+
+  @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; transition: none !important; } }
 </style>
 </head>
-<body>
+<body data-look="klar">
 <div class="bubbles" id="bubbles"></div>
 <canvas id="confetti"></canvas>
 
 <main>
   <!-- Auswahl -->
   <section class="screen active" id="screen-select">
-    <h1>🚀 Reihentrainer</h1>
+    <h1>Reihentrainer</h1>
     <p class="sub">Welche Reihe willst du heute üben?</p>
     <div class="grid" id="grid"></div>
-    <div class="reset-wrap"><button class="btn-small" id="btn-reset">🧹 Sterne zurücksetzen</button></div>
+    <div class="foot">
+      <div class="looks" role="radiogroup" aria-label="Stil">
+        <span class="looks-label">Stil:</span>
+        <button class="look" role="radio" data-look="arcade"><span class="sw sw-arcade"></span>Level</button>
+        <button class="look" role="radio" data-look="klar"><span class="sw sw-klar"></span>Klar</button>
+        <button class="look" role="radio" data-look="comic"><span class="sw sw-comic"></span>Comic</button>
+      </div>
+      <button class="btn-small" id="btn-reset">Sterne zurücksetzen</button>
+    </div>
   </section>
 
   <!-- Üben -->
   <section class="screen" id="screen-play">
     <div class="topbar">
-      <button class="btn-small" id="btn-back">⬅ Zurück</button>
+      <button class="btn-small" id="btn-back">‹ Zurück</button>
       <span class="badge" id="play-title"></span>
-      <button class="btn-small" id="btn-sound" title="Ton an/aus">🔊</button>
+      <button class="btn-small" id="btn-sound"></button>
     </div>
     <div class="progress" id="progress"></div>
+    <div class="round" id="round"></div>
     <div class="card">
-      <div class="mascot"><span class="face" id="face">🦉</span><span class="speech" id="speech">Los geht's!</span></div>
+      <span class="speech" id="speech">Los geht's!</span>
       <div class="task" id="task"></div>
       <div class="solution" id="solution"></div>
       <div class="pad" id="pad"></div>
+      <div class="choices" id="choices" hidden></div>
     </div>
   </section>
 
   <!-- Geschafft -->
   <section class="screen" id="screen-done">
     <div class="card">
-      <div class="trophy">🏆</div>
+      <div class="trophy">★</div>
       <div class="done-title" id="done-title"></div>
       <div class="stats" id="done-stats"></div>
-      <button class="big-btn" id="btn-again">🔁 Nochmal üben</button>
-      <button class="big-btn alt" id="btn-other">🎯 Andere Reihe</button>
+      <button class="big-btn" id="btn-again">Nochmal üben</button>
+      <button class="big-btn alt" id="btn-other">Andere Reihe</button>
     </div>
   </section>
 </main>
@@ -182,23 +303,36 @@
 (() => {
   const NEEDED = 2;           // wie oft jede Aufgabe richtig sein muss
   const TIME_LIMIT = 10000;   // ms – unsichtbarer Timer
-  const COLORS = ["#ff6b6b","#ff9f43","#feca57","#1dd1a1","#10ac84","#48dbfb","#2e86de","#5f27cd","#c56cf0","#ff6bcb"];
-  const EMOJIS = ["🐞","🦊","🐝","🐢","🐸","🐬","🐳","🦄","🐙","🦖"];
-  const PRAISE = ["Super!","Klasse!","Richtig!","Toll gemacht!","Spitze!","Wow!","Genau!","Prima!","Stark!","Jawoll!"];
-  const HAPPY  = ["🦉","😄","🤩","🥳","😎"];
-  const STREAK = { 3: "3 in Folge! 🔥", 5: "5 in Folge! 🔥🔥", 10: "10 in Folge! Du bist ein Profi! 🌟" };
+  const CONFETTI = {
+    arcade: ["#3ee0ff", "#ffb627", "#ff4f8b", "#1fbf75", "#eef0ff"],
+    klar:   ["#ff6a13", "#16264a", "#16a864", "#ffc49e", "#6a7591"],
+    comic:  ["#e63946", "#2b59c3", "#ffd23f", "#2bb673", "#141414"]
+  };
+  const PRAISE = ["Super!","Klasse!","Richtig!","Gut gemacht!","Spitze!","Genau!","Prima!","Stark!","Jawoll!","Sauber!"];
+  const STREAK = { 3: "3 richtig in Folge!", 5: "5 in Folge! Stark!", 10: "10 in Folge! Du bist ein Profi!" };
 
   const $ = id => document.getElementById(id);
   const rand = arr => arr[Math.floor(Math.random() * arr.length)];
 
-  // ---------- Speicher (erfolgreich geschaffte Reihen) ----------
+  // ---------- Speicher (erfolgreich geschaffte Reihen, Ton, Stil) ----------
   const load = () => { try { return JSON.parse(sessionStorage.getItem("reihentrainer") || "{}"); } catch { return {}; } };
   const save = d => { try { sessionStorage.setItem("reihentrainer", JSON.stringify(d)); } catch {} };
   let store = load();
   if (!store.done) store.done = {};
   let soundOn = store.sound !== false;
+  let look = CONFETTI[store.look] ? store.look : "klar";
 
-  // ---------- Hintergrund-Blasen ----------
+  // ---------- Stil ----------
+  function applyLook() {
+    document.body.dataset.look = look;
+    document.querySelectorAll(".look").forEach(b => b.setAttribute("aria-checked", b.dataset.look === look));
+  }
+  document.querySelectorAll(".look").forEach(b => b.addEventListener("click", () => {
+    look = b.dataset.look; store.look = look; save(store); applyLook(); sndTap();
+  }));
+  const reiheName = r => look === "arcade" ? `Level ${r}` : `${r}er-Reihe`;
+
+  // ---------- Hintergrund-Blasen (nur Level-Stil) ----------
   for (let i = 0; i < 14; i++) {
     const s = document.createElement("span");
     const size = 20 + Math.random() * 70;
@@ -238,14 +372,14 @@
   // ---------- Auswahl ----------
   function buildGrid() {
     const g = $("grid"); g.innerHTML = "";
-    $("btn-reset").parentElement.hidden = Object.keys(store.done).length === 0;
+    $("btn-reset").hidden = Object.keys(store.done).length === 0;
     for (let r = 1; r <= 10; r++) {
-      const b = document.createElement("button");
-      b.className = "tile";
-      b.style.background = COLORS[r - 1];
-      b.innerHTML = `<span class="num">${r}er</span><span class="emo">${EMOJIS[r - 1]}</span>`;
       const n = store.done[r];
-      if (n) b.innerHTML += `<span class="medal">⭐${n > 1 ? n : ""}</span>`;
+      const b = document.createElement("button");
+      b.className = "tile" + (n ? " done" : "");
+      b.setAttribute("aria-label", `${r}er-Reihe`);
+      b.innerHTML = `<span class="num">${r}<span class="er">er</span></span>` +
+        (n ? `<span class="medal">★${n > 1 ? n : ""}</span>` : "");
       b.onclick = () => { sndTap(); startGame(r); };
       g.appendChild(b);
     }
@@ -253,20 +387,28 @@
 
   // ---------- Spiel ----------
   let game = null;
+  let nextTimer = null;   // ausstehender Wechsel zur nächsten Aufgabe
+  const stopTimer = () => { clearTimeout(nextTimer); nextTimer = null; };
 
   function startGame(r) {
+    stopTimer();
     game = {
       reihe: r,
       tasks: Array.from({ length: 10 }, (_, i) => ({ a: i + 1, count: 0 })),
-      current: null, last: null, started: 0,
+      current: null, last: null, started: 0, round: 0,
       input: "", locked: false, streak: 0, attempts: 0, mistakes: 0
     };
-    $("play-title").textContent = `${EMOJIS[r - 1]} ${r}er-Reihe`;
-    $("face").textContent = "🦉";
-    $("speech").textContent = "Los geht's!";
+    $("play-title").textContent = reiheName(r);
+    say("Los geht's!");
     buildProgress();
     show("play");
     nextTask();
+  }
+
+  function say(text) {
+    const s = $("speech");
+    s.textContent = text;
+    s.classList.remove("pop"); void s.offsetWidth; s.classList.add("pop");
   }
 
   function buildProgress() {
@@ -281,21 +423,70 @@
   function updateDot(i, bump) {
     const t = game.tasks[i], d = $("dot" + i);
     d.className = "dot" + (t.count >= NEEDED ? " full" : t.count > 0 ? " half" : "");
-    d.textContent = t.count >= NEEDED ? "⭐" : t.count > 0 ? "✨" : "";
     if (bump) { void d.offsetWidth; d.classList.add("bump"); }
   }
 
+  function updateRound() {
+    const need = game.round === 1 ? 1 : NEEDED;
+    const done = game.tasks.filter(t => t.count >= need).length;
+    $("round").innerHTML =
+      `<span>${game.round === 1 ? "Runde 1 · Antippen" : "Runde 2 · Eintippen"}</span><span>${done} / ${game.tasks.length}</span>`;
+  }
+
   function nextTask() {
-    const open = game.tasks.filter(t => t.count < NEEDED);
+    // Erst alle Multiple-Choice-Aufgaben (count 0), danach die Eingabe-Runde
+    const mcOpen = game.tasks.filter(t => t.count === 0);
+    const open = mcOpen.length ? mcOpen : game.tasks.filter(t => t.count < NEEDED);
     if (open.length === 0) return finish();
+    const round = mcOpen.length ? 1 : 2;
+    if (round !== game.round) {
+      if (game.round) say("Runde 2: Jetzt selbst eintippen!");
+      game.round = round;
+    }
+    updateRound();
     // gleiche Aufgabe nicht direkt hintereinander (wenn möglich)
     const pool = open.length > 1 ? open.filter(t => t !== game.last) : open;
     game.current = rand(pool);
     game.input = "";
     game.locked = false;
+    // Erste Runde einer Aufgabe: Multiple Choice, danach selbst eintippen
+    game.mc = game.current.count === 0;
     $("solution").textContent = "";
+    $("pad").hidden = game.mc;
+    $("choices").hidden = !game.mc;
+    if (game.mc) buildChoices();
     renderTask();
     game.started = performance.now();
+  }
+
+  // Zwei falsche Antworten nah an der Lösung: Nachbarn in der Reihe (±r) und knapp daneben (±1, ±2)
+  function buildChoices() {
+    const sol = game.current.a * game.reihe, r = game.reihe;
+    const near = [...new Set([sol - r, sol + r, sol - 1, sol + 1, sol - 2, sol + 2])]
+      .filter(v => v > 0 && v !== sol)
+      .sort(() => Math.random() - .5);
+    const opts = [sol, near[0], near[1]].sort(() => Math.random() - .5);
+    const c = $("choices"); c.innerHTML = "";
+    opts.forEach(v => {
+      const b = document.createElement("button");
+      b.className = "choice"; b.textContent = v; b.dataset.v = v;
+      b.addEventListener("click", () => pick(v));
+      c.appendChild(b);
+    });
+  }
+
+  function pick(v) {
+    if (!game || game.locked) return;
+    game.input = String(v);
+    submit();
+  }
+
+  function markChoices(sol) {
+    document.querySelectorAll("#choices .choice").forEach(b => {
+      const v = Number(b.dataset.v);
+      if (v === sol) b.classList.add("good");
+      else if (String(v) === game.input) b.classList.add("bad");
+    });
   }
 
   function renderTask(state = "") {
@@ -306,7 +497,7 @@
   }
 
   function press(k) {
-    if (!game || game.locked) return;
+    if (!game || game.locked || game.mc) return;
     if (k === "del") game.input = game.input.slice(0, -1);
     else if (k === "ok") return submit();
     else if (game.input.length < 3) game.input = (game.input === "0" ? "" : game.input) + k;
@@ -323,28 +514,26 @@
     const correct = Number(game.input) === t.a * game.reihe;
     const idx = game.tasks.indexOf(t);
     game.last = t;
+    if (game.mc) markChoices(t.a * game.reihe);
 
     if (correct) {
       // Nur innerhalb des Zeitlimits zählt es – zu langsam kommt stillschweigend wieder.
       const counted = elapsed <= TIME_LIMIT;
-      if (counted) t.count++;
+      if (counted) { t.count++; updateDot(idx, true); updateRound(); }
       game.streak++;
       renderTask("good");
-      if (counted) updateDot(idx, true);
-      $("speech").textContent = STREAK[game.streak] || rand(PRAISE);
-      const f = $("face"); f.textContent = rand(HAPPY); f.classList.remove("jump"); void f.offsetWidth; f.classList.add("jump");
+      say(STREAK[game.streak] || rand(PRAISE));
       sndGood();
       if (game.streak === 5 || game.streak === 10) burst(60);
-      setTimeout(nextTask, 800);
+      nextTimer = setTimeout(nextTask, 800);
     } else {
       game.streak = 0;
       game.mistakes++;
       renderTask("bad");
       $("solution").textContent = `${t.a} · ${game.reihe} = ${t.a * game.reihe}`;
-      $("speech").textContent = "Fast! Merk's dir – die kommt wieder.";
-      $("face").textContent = "🤔";
+      say("Fast! Merk dir die Lösung, die Aufgabe kommt wieder.");
       sndBad();
-      setTimeout(nextTask, 5000);
+      nextTimer = setTimeout(nextTask, 5000);
     }
   }
 
@@ -352,11 +541,11 @@
     const r = game.reihe;
     store.done[r] = (store.done[r] || 0) + 1;
     save(store);
-    $("done-title").textContent = `Die ${r}er-Reihe geschafft!`;
+    $("done-title").textContent = `${reiheName(r)} geschafft!`;
     const m = game.mistakes;
     $("done-stats").innerHTML =
-      `${game.attempts} Antworten · ${m === 0 ? "kein einziger Fehler! 🌟" : m + " Fehler"}<br>` +
-      `Du hast diese Reihe schon ${store.done[r]}× geschafft ${"⭐".repeat(Math.min(store.done[r], 10))}`;
+      `${game.attempts} Antworten · ${m === 0 ? "kein einziger Fehler!" : m + " Fehler"}<br>` +
+      `Schon ${store.done[r]}× geschafft <span class="stars">${"★".repeat(Math.min(store.done[r], 10))}</span>`;
     show("done");
     sndWin();
     burst(250);
@@ -379,14 +568,14 @@
     else if (e.key === "Enter") { e.preventDefault(); press("ok"); }
   });
 
-  $("btn-back").onclick = () => { game = null; buildGrid(); show("select"); };
+  $("btn-back").onclick = () => { stopTimer(); game = null; buildGrid(); show("select"); };
   $("btn-again").onclick = () => startGame(game.reihe);
   $("btn-other").onclick = () => { buildGrid(); show("select"); };
   $("btn-reset").onclick = () => {
     if (!confirm("Wirklich alle Sterne löschen?")) return;
     store.done = {}; save(store); buildGrid();
   };
-  const updSound = () => $("btn-sound").textContent = soundOn ? "🔊" : "🔇";
+  const updSound = () => $("btn-sound").textContent = soundOn ? "Ton an" : "Ton aus";
   $("btn-sound").onclick = () => { soundOn = !soundOn; store.sound = soundOn; save(store); updSound(); };
   updSound();
 
@@ -403,7 +592,7 @@
         y: innerHeight * .35,
         vx: (Math.random() - .5) * 16, vy: -Math.random() * 16 - 4,
         s: 6 + Math.random() * 8, r: Math.random() * 6, vr: (Math.random() - .5) * .3,
-        c: rand(COLORS), life: 0
+        c: rand(CONFETTI[look]), life: 0
       });
     }
     if (!running) { running = true; requestAnimationFrame(tick); }
@@ -420,6 +609,7 @@
     if (parts.length) requestAnimationFrame(tick); else { running = false; cx.clearRect(0, 0, cv.width, cv.height); }
   }
 
+  applyLook();
   buildGrid();
 })();
 </script>
