@@ -6,7 +6,7 @@
 <title>Reihentrainer</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bangers&family=Figtree:wght@500;700;800;900&family=Lexend:wght@400;500;700;800&family=Rubik:wght@500;700;800&family=Russo+One&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bangers&family=Figtree:wght@500;700;800;900&family=Lexend:wght@400;500;700;800&family=Rubik:wght@500;700;800&family=Russo+One&family=Sora:wght@600;700;800&family=Barlow+Condensed:ital,wght@0,700;1,800;1,900&family=Baloo+2:wght@700;800&display=swap">
 <style>
   /* ---------- Stile: Level (arcade), Klar (klar), Comic (comic) ---------- */
   body[data-look="klar"] {
@@ -65,6 +65,69 @@
     --font-body: "Lexend", "Segoe UI", system-ui, sans-serif;
   }
 
+  body[data-look="glas"] {
+    --bg: radial-gradient(40% 35% at 12% 10%, #8fe3dc 0%, transparent 70%) fixed,
+          radial-gradient(45% 40% at 92% 28%, #ffc2cf 0%, transparent 70%) fixed,
+          radial-gradient(55% 45% at 40% 98%, #bcd7ff 0%, transparent 70%) fixed, #eef1f8;
+    --text: #1c2340; --text-dim: #55607f;
+    --surface: rgba(255,255,255,.55); --ink: #1c2340; --muted: #55607f;
+    --accent: #0e9f9a; --accent-ink: #fff; --accent-shadow: 0 8px 20px rgba(14,159,154,.35);
+    --alt: #f25c78; --alt-shadow: 0 8px 20px rgba(242,92,120,.3);
+    --op: #f25c78; --ans: #0e9f9a; --ans-line: transparent;
+    --good: #0e9f9a; --good-shadow: 0 6px 18px rgba(14,159,154,.4);
+    --bad: #f25c78;  --bad-shadow: 0 6px 18px rgba(242,92,120,.35);
+    --key: rgba(255,255,255,.72); --key-ink: #1c2340; --key-border: 1px solid rgba(255,255,255,.9);
+    --key-shadow: 0 4px 14px rgba(28,35,64,.08); --key-shadow-press: 0 1px 4px rgba(28,35,64,.08); --key-press: translateY(2px);
+    --card-border: 1px solid rgba(255,255,255,.85); --card-shadow: 0 10px 30px rgba(28,35,64,.08);
+    --r-card: 24px; --r-btn: 18px;
+    --prog-empty: rgba(28,35,64,.1); --prog-half: rgba(14,159,154,.45); --prog-full: #0e9f9a;
+    --font-display: "Sora", "Segoe UI", system-ui, sans-serif; --display-weight: 800;
+    --font-num: var(--font-display); --num-weight: var(--display-weight);
+    --font-body: "Sora", "Segoe UI", system-ui, sans-serif;
+    --trophy-ink: #fff;
+  }
+  body[data-look="sport"] {
+    --bg: repeating-linear-gradient(115deg, transparent 0 38px, rgba(255,255,255,.06) 38px 76px) fixed,
+          linear-gradient(160deg, #1d52ff 0%, #1340d8 55%, #0c2c9e 100%) fixed;
+    --text: #fff; --text-dim: rgba(255,255,255,.82);
+    --surface: #fff; --ink: #0a1440; --muted: #1340d8;
+    --accent: #ffd400; --accent-ink: #0a1440; --accent-shadow: 5px 5px 0 #0a1440;
+    --alt: #ff5a4e; --alt-shadow: 5px 5px 0 #0a1440;
+    --op: #ff5a4e; --ans: #1340d8; --ans-line: #ffd400;
+    --good: #16c47f; --good-shadow: 5px 5px 0 #0a1440;
+    --bad: #ff5a4e;  --bad-shadow: 5px 5px 0 #0a1440;
+    --key: #1340d8; --key-ink: #fff; --key-border: none;
+    --key-shadow: 5px 5px 0 #0a1440; --key-shadow-press: 2px 2px 0 #0a1440; --key-press: translate(3px, 3px);
+    --card-border: none; --card-shadow: 8px 8px 0 #0a1440;
+    --r-card: 4px; --r-btn: 3px;
+    --prog-empty: rgba(255,255,255,.2); --prog-half: linear-gradient(90deg, #ffd400 50%, rgba(255,255,255,.2) 50%); --prog-full: #ffd400;
+    --font-display: "Barlow Condensed", "Arial Narrow", sans-serif; --display-weight: 900; --display-style: italic;
+    --font-num: var(--font-display); --num-weight: var(--display-weight);
+    --font-body: "Barlow Condensed", "Arial Narrow", sans-serif;
+    --trophy-ink: #0a1440;
+  }
+  body[data-look="knete"] {
+    --puff: inset -5px -6px 10px rgba(61,44,78,.10), inset 5px 6px 10px rgba(255,255,255,.75), 6px 9px 18px rgba(170,100,80,.22);
+    --puff-in: inset 5px 6px 10px rgba(61,44,78,.14), inset -4px -4px 8px rgba(255,255,255,.6), 2px 3px 6px rgba(170,100,80,.18);
+    --bg: #ffe9dc;
+    --text: #3d2c4e; --text-dim: #8a6f7e;
+    --surface: #fff4ec; --ink: #3d2c4e; --muted: #8a6f7e;
+    --accent: #7b5cff; --accent-ink: #fff; --accent-shadow: var(--puff);
+    --alt: #ff8a5c; --alt-shadow: var(--puff);
+    --op: #ff8a5c; --ans: #7b5cff; --ans-line: transparent;
+    --good: #43c78b; --good-shadow: var(--puff);
+    --bad: #ff7b7b;  --bad-shadow: var(--puff);
+    --key: #fff9f4; --key-ink: #3d2c4e; --key-border: none;
+    --key-shadow: var(--puff); --key-shadow-press: var(--puff-in); --key-press: scale(.97);
+    --card-border: none; --card-shadow: var(--puff);
+    --r-card: 30px; --r-btn: 22px;
+    --prog-empty: #f3d9ca; --prog-half: #d8cbff; --prog-full: #43c78b;
+    --font-display: "Baloo 2", "Segoe UI", system-ui, sans-serif; --display-weight: 800;
+    --font-num: var(--font-display); --num-weight: var(--display-weight);
+    --font-body: "Baloo 2", "Segoe UI", system-ui, sans-serif;
+    --trophy-ink: #fff;
+  }
+
   /* ---------- Grundlayout ---------- */
   * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
   html, body { height: 100%; margin: 0; }
@@ -91,7 +154,7 @@
   @keyframes pop { from { transform: scale(.96); opacity: 0; } to { transform: scale(1); opacity: 1; } }
 
   h1 {
-    text-align: center; font-family: var(--font-display); font-weight: var(--display-weight);
+    text-align: center; font-family: var(--font-display); font-weight: var(--display-weight); font-style: var(--display-style, normal);
     font-size: clamp(2.2rem, 8vw, 3.4rem); line-height: 1.05; margin: 16px 0 6px; color: var(--text);
   }
   body[data-look="arcade"] h1 { text-transform: uppercase; letter-spacing: .04em; text-shadow: 0 0 24px rgba(62,224,255,.45); }
@@ -110,7 +173,7 @@
   }
   .tile:hover { transform: translateY(-3px); }
   .tile:active { transform: var(--key-press); box-shadow: var(--key-shadow-press); }
-  .tile .num { font-family: var(--font-num); font-weight: var(--num-weight); font-size: clamp(1.8rem, 7vw, 2.4rem); line-height: 1; }
+  .tile .num { font-family: var(--font-num); font-weight: var(--num-weight); font-style: var(--display-style, normal); font-size: clamp(1.8rem, 7vw, 2.4rem); line-height: 1; }
   .tile .medal {
     position: absolute; top: -9px; right: -9px; min-width: 30px; height: 30px; padding: 0 7px;
     border-radius: 999px; background: var(--alt); color: #fff; font-weight: 800; font-size: .85rem;
@@ -141,6 +204,9 @@
   .sw-arcade { background: linear-gradient(135deg, #12163a 50%, #3ee0ff 50%); }
   .sw-klar   { background: linear-gradient(135deg, #16264a 50%, #ff6a13 50%); }
   .sw-comic  { background: linear-gradient(135deg, #ffd23f 50%, #e63946 50%); box-shadow: inset 0 0 0 2px #141414; }
+  .sw-glas   { background: linear-gradient(135deg, #8fe3dc, #bcd7ff 55%, #ffc2cf); }
+  .sw-sport  { background: linear-gradient(135deg, #1340d8 50%, #ffd400 50%); }
+  .sw-knete  { background: linear-gradient(135deg, #d8cbff 50%, #b6f0d6 50%); }
 
   /* ---------- Üben ---------- */
   .topbar { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-bottom: 14px; }
@@ -149,7 +215,7 @@
     box-shadow: var(--key-shadow); font-size: 1rem; font-weight: 800; padding: 9px 14px; cursor: pointer;
   }
   .btn-small:active { transform: var(--key-press); box-shadow: var(--key-shadow-press); }
-  .badge { font-family: var(--font-display); font-weight: var(--display-weight); font-size: 1.4rem; color: var(--text); text-align: center; }
+  .badge { font-family: var(--font-display); font-weight: var(--display-weight); font-style: var(--display-style, normal); font-size: 1.4rem; color: var(--text); text-align: center; }
   body[data-look="arcade"] .badge { text-transform: uppercase; letter-spacing: .06em; }
   body[data-look="comic"] .badge { font-size: 1.8rem; letter-spacing: .04em; color: #fffdf4; -webkit-text-stroke: 1.5px #141414; text-shadow: 3px 3px 0 #141414; }
 
@@ -189,7 +255,7 @@
   }
 
   .task {
-    font-family: var(--font-num); font-weight: var(--num-weight); font-variant-numeric: tabular-nums;
+    font-family: var(--font-num); font-weight: var(--num-weight); font-style: var(--display-style, normal); font-variant-numeric: tabular-nums;
     font-size: clamp(2.8rem, 13vw, 4.6rem); line-height: 1.15; margin: 10px 0 4px;
   }
   .task .x { color: var(--op); }
@@ -206,7 +272,7 @@
   .key, .choice {
     border: var(--key-border); border-radius: var(--r-btn); cursor: pointer;
     background: var(--key); color: var(--key-ink); box-shadow: var(--key-shadow);
-    font-family: var(--font-num); font-weight: var(--num-weight); font-variant-numeric: tabular-nums;
+    font-family: var(--font-num); font-weight: var(--num-weight); font-style: var(--display-style, normal); font-variant-numeric: tabular-nums;
     transition: background .2s, color .2s;
   }
   .key { font-size: clamp(1.6rem, 7vw, 2.1rem); padding: 12px 0; }
@@ -225,23 +291,71 @@
   .trophy {
     width: 112px; height: 112px; margin: 4px auto 8px; border-radius: 50%; line-height: 1;
     display: flex; align-items: center; justify-content: center; font-size: 4rem;
-    background: var(--prog-full); color: var(--surface); border: var(--key-border); box-shadow: var(--key-shadow);
+    background: var(--prog-full); color: var(--trophy-ink, var(--surface)); border: var(--key-border); box-shadow: var(--key-shadow);
     animation: spin 1.2s ease-out;
   }
   @keyframes spin { from { transform: scale(0) rotate(-360deg); } to { transform: scale(1) rotate(0); } }
-  .done-title { font-family: var(--font-display); font-weight: var(--display-weight); font-size: clamp(2rem, 8vw, 2.8rem); line-height: 1.1; margin: 6px 0; }
+  .done-title { font-family: var(--font-display); font-weight: var(--display-weight); font-style: var(--display-style, normal); font-size: clamp(2rem, 8vw, 2.8rem); line-height: 1.1; margin: 6px 0; }
   body[data-look="comic"] .done-title { letter-spacing: .04em; }
   .stats { font-size: 1.15rem; font-weight: 700; color: var(--muted); margin: 8px 0 18px; }
   .stats .stars { color: var(--prog-full); letter-spacing: 2px; }
   .big-btn {
     display: block; width: 100%; cursor: pointer; margin-top: 14px; padding: 16px;
     border: var(--key-border); border-radius: var(--r-btn);
-    font-family: var(--font-display); font-weight: var(--display-weight); font-size: 1.45rem;
+    font-family: var(--font-display); font-weight: var(--display-weight); font-style: var(--display-style, normal); font-size: 1.45rem;
     background: var(--accent); color: var(--accent-ink); box-shadow: var(--accent-shadow);
   }
   body[data-look="comic"] .big-btn { letter-spacing: .05em; }
   .big-btn.alt { background: var(--alt); color: #fff; box-shadow: var(--alt-shadow); }
   .big-btn:active { transform: var(--key-press); box-shadow: var(--key-shadow-press); }
+
+  /* ---------- Glas: Milchglas-Flächen ---------- */
+  body[data-look="glas"] :is(.card, .tile, .btn-small, .look, .key, .choice) { backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); }
+  body[data-look="glas"] :is(.btn-small, .look) { border-radius: 999px; }
+  body[data-look="glas"] .tile.done { background: rgba(14,159,154,.16); border-color: rgba(14,159,154,.5); }
+  body[data-look="glas"] .tile .medal { background: var(--accent); }
+  body[data-look="glas"] .dot { height: 8px; }
+  body[data-look="glas"] .answer { border-bottom: none; background: rgba(255,255,255,.7); border-radius: 14px; }
+
+  /* ---------- Sport: schräge Flächen (Hintergrund als geneigtes ::before, Text bleibt gerade) ---------- */
+  body[data-look="sport"] :is(h1, .badge, .big-btn, .btn-small, .round, .look) { text-transform: uppercase; letter-spacing: .03em; }
+  body[data-look="sport"] .round { font-size: 1rem; }
+  body[data-look="sport"] :is(.key, .choice, .tile, .btn-small, .big-btn, .look) {
+    position: relative; isolation: isolate; background: transparent; border: none; box-shadow: none;
+    --sk-bg: var(--key); --sk-shadow: var(--key-shadow);
+  }
+  body[data-look="sport"] :is(.key, .choice, .tile, .btn-small, .big-btn, .look)::before {
+    content: ""; position: absolute; inset: 0; z-index: -1; border-radius: 3px;
+    background: var(--sk-bg); box-shadow: var(--sk-shadow); transform: skewX(-10deg);
+  }
+  body[data-look="sport"] :is(.key, .choice, .tile, .btn-small, .big-btn, .look):active { box-shadow: none; }
+  body[data-look="sport"] :is(.key, .choice, .tile, .btn-small, .big-btn, .look):active::before { box-shadow: var(--key-shadow-press); }
+  body[data-look="sport"] :is(.tile, .btn-small, .look) { --sk-bg: #fff; color: #0a1440; }
+  body[data-look="sport"] .tile.done { --sk-bg: #ffd400; }
+  body[data-look="sport"] .tile .medal { background: var(--alt); }
+  body[data-look="sport"] .key.del { color: #ffd400; }
+  body[data-look="sport"] :is(.key.ok, .choice.good) { --sk-bg: var(--good); }
+  body[data-look="sport"] .choice.bad { --sk-bg: var(--bad); }
+  body[data-look="sport"] .big-btn { --sk-bg: var(--accent); }
+  body[data-look="sport"] .big-btn.alt { --sk-bg: var(--alt); }
+  body[data-look="sport"] .dot { border-radius: 0; transform: skewX(-20deg); }
+  body[data-look="sport"] .speech { color: #1340d8; text-transform: uppercase; letter-spacing: .05em; font-style: italic; font-size: 1.2rem; }
+
+  /* ---------- Knete: weiche 3D-Knöpfe in Pastell ---------- */
+  body[data-look="knete"] .progress { grid-template-columns: repeat(10, minmax(0, 30px)); justify-content: center; gap: 8px; }
+  body[data-look="knete"] .dot { height: auto; aspect-ratio: 1; border-radius: 50%; box-shadow: inset 2px 3px 5px rgba(61,44,78,.12); }
+  body[data-look="knete"] :is(.dot.half, .dot.full) { box-shadow: var(--puff); }
+  body[data-look="knete"] .answer { border-bottom: none; background: #fbe1d3; border-radius: 18px; box-shadow: var(--puff-in); }
+  body[data-look="knete"] .choice:nth-child(1) { background: #b6f0d6; }
+  body[data-look="knete"] .choice:nth-child(2) { background: #d8cbff; }
+  body[data-look="knete"] .choice:nth-child(3) { background: #c2e2ff; }
+  body[data-look="knete"] .choice.good { background: var(--good); color: #fff; }
+  body[data-look="knete"] .choice.bad { background: var(--bad); color: #fff; }
+  body[data-look="knete"] .tile:nth-child(4n+1) { background: #b6f0d6; }
+  body[data-look="knete"] .tile:nth-child(4n+2) { background: #d8cbff; }
+  body[data-look="knete"] .tile:nth-child(4n+3) { background: #c2e2ff; }
+  body[data-look="knete"] .tile:nth-child(4n)   { background: #ffd0b5; }
+  body[data-look="knete"] .tile .medal { background: var(--alt); }
 
   #confetti { position: fixed; inset: 0; pointer-events: none; z-index: 5; }
 
@@ -264,6 +378,9 @@
         <button class="look" role="radio" data-look="arcade"><span class="sw sw-arcade"></span>Level</button>
         <button class="look" role="radio" data-look="klar"><span class="sw sw-klar"></span>Klar</button>
         <button class="look" role="radio" data-look="comic"><span class="sw sw-comic"></span>Comic</button>
+        <button class="look" role="radio" data-look="glas"><span class="sw sw-glas"></span>Glas</button>
+        <button class="look" role="radio" data-look="sport"><span class="sw sw-sport"></span>Sport</button>
+        <button class="look" role="radio" data-look="knete"><span class="sw sw-knete"></span>Knete</button>
       </div>
       <button class="btn-small" id="btn-reset">Sterne zurücksetzen</button>
     </div>
@@ -306,7 +423,10 @@
   const CONFETTI = {
     arcade: ["#3ee0ff", "#ffb627", "#ff4f8b", "#1fbf75", "#eef0ff"],
     klar:   ["#ff6a13", "#16264a", "#16a864", "#ffc49e", "#6a7591"],
-    comic:  ["#e63946", "#2b59c3", "#ffd23f", "#2bb673", "#141414"]
+    comic:  ["#e63946", "#2b59c3", "#ffd23f", "#2bb673", "#141414"],
+    glas:   ["#0e9f9a", "#f25c78", "#8fe3dc", "#bcd7ff", "#ffc2cf"],
+    sport:  ["#ffd400", "#ff5a4e", "#ffffff", "#16c47f", "#0a1440"],
+    knete:  ["#b6f0d6", "#d8cbff", "#c2e2ff", "#ffd0b5", "#43c78b", "#ff8a5c"]
   };
   const PRAISE = ["Super!","Klasse!","Richtig!","Gut gemacht!","Spitze!","Genau!","Prima!","Stark!","Jawoll!","Sauber!"];
   const STREAK = { 3: "3 richtig in Folge!", 5: "5 in Folge! Stark!", 10: "10 in Folge! Du bist ein Profi!" };
